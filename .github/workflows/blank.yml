@@ -33,10 +33,10 @@ jobs:
           ls -la
           hugo new site yagiz
           ls -la
-          mv -f /home/runner/work/reference/reference/content/ /home/runner/work/reference/reference/yagiz/
-          ls -la /home/runner/work/reference/reference/yagiz/content/
-          git clone https://github.com/matcornic/hugo-theme-learn.git /home/runner/work/reference/reference/yagiz/themes/hugo-theme-learn
-          mv -f /home/runner/work/reference/reference/config.toml /home/runner/work/reference/reference/yagiz/
+          mv -f /home/runner/work/documentation/documentation/content/ /home/runner/work/documentation/documentation/yagiz/
+          ls -la /home/runner/work/documentation/documentation/yagiz/content/
+          git clone https://github.com/matcornic/hugo-theme-learn.git /home/runner/work/documentation/documentation/yagiz/themes/hugo-theme-learn
+          mv -f /home/runner/work/documentation/documentation/config.toml /home/runner/work/documentation/documentation/yagiz/
 
       - name: Run Hugo
         working-directory: ./yagiz
@@ -44,7 +44,7 @@ jobs:
       - name: Publish
         uses: nogsantos/scp-deploy@master
         with:
-          src: /home/runner/work/reference/reference/yagiz/public
+          src: /home/runner/work/documentation/documentation/yagiz/public
           host: ${{ secrets.SSH_HOST }}
           remote: ${{ secrets.SSH_DIR }}
           port: ${{ secrets.SSH_PORT }}
