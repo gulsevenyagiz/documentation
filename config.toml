@@ -1,0 +1,20 @@
+baseURL = "http://gulsevenyagiz.com"
+canonifyURLs = false
+languageCode = "en-us"
+title = "Documentation"
+theme = "hugo-theme-learn"
+EnableGitInfo = true
+
+# For search functionality
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
