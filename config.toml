@@ -1,13 +1,11 @@
 baseURL = "https://gulsevenyagiz.com"
-canonifyURLs = false
+canonifyURLs = true
 languageCode = "en-us"
 title = "Documentation"
 theme = "hugo-theme-learn"
-EnableGitInfo = true
 
-# For search functionality
-[outputs]
-home = [ "HTML", "RSS", "JSON"]
+
+
 
 [taxonomies]
   tag = "tags"
