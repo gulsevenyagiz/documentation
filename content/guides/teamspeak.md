@@ -4,7 +4,7 @@ weight: 2
 chapter: false
 ---
 
-# Installing teamspeak.
+## Installing teamspeak.
 
 ## Requirements
 
