@@ -1,4 +1,4 @@
-baseURL = "http://gulsevenyagiz.com"
+baseURL = "https://gulsevenyagiz.com"
 canonifyURLs = false
 languageCode = "en-us"
 title = "Documentation"
