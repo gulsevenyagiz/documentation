@@ -10,7 +10,7 @@ chapter: false
 
 N/A
 
-### Semi-automatic installation :
+## Semi-automatic installation
 
 Clone the script [good_stuff](https://github.com/gulsevenyagiz/good_stuff). 
 
@@ -35,4 +35,4 @@ Check if teamspeak was started successfully
 systemctl status teamspeak
 ```
 
-### Manual  installation :
+### Manual  installation
