@@ -37,7 +37,7 @@ Check if teamspeak was started successfully
 systemctl status teamspeak
 ```
 
-#### Updating teamspeak with the manual approach
+#### Updating teamspeak with the automatic approach
 Simply change the teamspeak version in ```manager.sh``` to the newest version. The script will take care of the rest without overriding the exsisting database.
 
 ## Manual  installation
@@ -52,7 +52,7 @@ mv teamspeak3-server_linux_amd64-3.13.3.tar.bz2 /opt/
 ```
 Unzip the file and cd into the created directory.
 ```
-tar -xvf teamspeak3-server_linux_amd64-3.13.3.tar.bz2
+tar -xvf teamspeak3-server_linux_amd64-3.13.3.tar.bz2 /opt/teamspeak3-server_linux_amd64/
 cd teamspeak3-server_linux_amd64-3.13.3
 ```
 Create a new teamspeak user
@@ -77,6 +77,67 @@ mkdir /var/local/teamspeak/
 mv ts3server.ini /var/local/teamspeak/
 mv ts3server.sqlitedb  /var/local/teamspeak/
 ```
-Create softlinks back to the 
+Create softlinks back to the folder of teamspeak.
+```
+ln -s /var/local/teamspeak/ts3server.ini /opt/teamspeak3-server_linux_amd64/
+ln -s /var/local/teamspeak/ts3server.sqlitedb /opt/teamspeak3-server_linux_amd64/
+```
 
+Add filewall rules and restart firewall-cmd
+```
+firewall-cmd --permanent --zone=public --add-port=9987/udp
+firewall-cmd --permanent --zone=public --add-port=30033/tcp
+systmectl reload firewalld
+```
+
+Create the service
+``` 
+nano /etc/systemd/system/teamspeak.service 
+```
+Copy-paste the content
+```
+[Unit]
+Description=TeamSpeak Server Service
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory=/opt/teamspeak3-server_linux_amd64/
+ExecStart=/opt/teamspeak3-server_linux_amd64/ts3server_startscript.sh start inifile=ts3server.ini
+ExecStop=/opt/teamspeak3-server_linux_amd64/ts3server_startscript.sh stop
+User=teamspeak
+Group=teamspeak
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=teamspeak
+
+[Install]
+WantedBy=multi-user.target
+```
+Enable teamspeak on boot and start
+```
+systemctl enable teamspeak
+systemctl start teamspeak
+```
+
+#### Updating with the manual approach.
+Stop teamspeak
+```
+systemctl stop teamspeak
+```
+Remove the exsisting teamspeak
+```
+rm -rf  /opt/teamspeak3-server_linux_amd64
+```
+Download the new version as descriped in the steps above.
+
+Create new softlinks
+```
+ln -s /var/local/teamspeak/ts3server.ini /opt/teamspeak3-server_linux_amd64/
+ln -s /var/local/teamspeak/ts3server.sqlitedb /opt/teamspeak3-server_linux_amd64/
+```
+Start teamspeak
+```
+systemctl start teamspeak
+```
 
